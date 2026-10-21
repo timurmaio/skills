@@ -1,0 +1,3 @@
+# Cursor: агент не читает значения env (AGENTS.md, «Env»). Терминал агента этот файл не ограничивает.
+.env.local
+.env.browser.local

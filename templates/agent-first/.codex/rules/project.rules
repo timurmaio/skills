@@ -1,0 +1,16 @@
+# Push — только по явному запросу пользователя (AGENTS.md, «Коммиты»).
+# Правило загружается, когда проект доверенный (trusted) в Codex.
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "git push — только по явному запросу пользователя (AGENTS.md)",
+    match = [
+        "git push",
+        "git push origin feature-branch",
+        "git push --force-with-lease origin feature-branch",
+    ],
+    not_match = [
+        "git status",
+        "git pull origin {{MAIN_BRANCH}}",
+    ],
+)

@@ -1,0 +1,12 @@
+# --- agent-first setup: допиши в .gitignore проекта ---
+# Локальные env: агент их не читает (AGENTS.md, «Env»).
+.env*.local
+# Evidence браузерной проверки агента (docs/engineering/browser-testing.md).
+/browser-artifacts/
+# Cursor: локальное состояние.
+.cursor/
+# Claude Code: локальное игнорируется, кроме симлинков на project skills (источник — .agents/skills)
+# и общих настроек разрешений (личные — в .claude/settings.local.json).
+.claude/*
+!.claude/skills/
+!.claude/settings.json

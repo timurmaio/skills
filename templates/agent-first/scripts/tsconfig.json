@@ -1,0 +1,17 @@
+{
+	// Скрипты guardrails и browser harness: Node запускает .mts без сборки и требует расширение в импорте.
+	"compilerOptions": {
+		"target": "ES2024",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"lib": ["ES2024"],
+		"types": ["node"],
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"include": ["**/*.mts", "**/*.ts"]
+}
