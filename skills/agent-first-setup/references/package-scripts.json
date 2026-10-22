@@ -1,0 +1,23 @@
+{
+	"scripts": {
+		"env:copy": "bash scripts/copyWorktreeEnv.sh",
+		"browser": "node scripts/agentBrowser.mts",
+		"browser:port": "node scripts/browserPort.mts",
+		"browser:install": "agent-browser install",
+		"browser:login": "node scripts/prepareBrowserAuth.mts",
+		"browser:doctor": "node scripts/browserDoctor.mts",
+		"browser:network": "node scripts/browserNetwork.mts",
+		"lint:docs": "node scripts/checkDocsToc.mts",
+		"lint:links": "node scripts/checkDocsLinks.mts",
+		"lint:skills": "node scripts/checkVendoredSkills.mts && bash scripts/linkClaudeSkills.sh --check",
+		"lint:size": "node scripts/checkFileSize.mts",
+		"lint:size:update": "node scripts/checkFileSize.mts --update",
+		"lint:agents": "pnpm lint:docs && pnpm lint:links && pnpm lint:skills && pnpm lint:size",
+		"check": "pnpm lint:agents && <lint проекта> && tsc --noEmit && tsc --noEmit -p scripts",
+		"verify": "pnpm check && pnpm test:run"
+	},
+	"devDependencies": {
+		"agent-browser": "<текущая версия>",
+		"@types/node": "<версия под Node проекта>"
+	}
+}
