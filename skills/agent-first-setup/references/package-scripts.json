@@ -14,7 +14,7 @@
 		"lint:size:update": "node scripts/checkFileSize.mts --update",
 		"lint:agents": "pnpm lint:docs && pnpm lint:links && pnpm lint:skills && pnpm lint:size",
 		"check": "pnpm lint:agents && <lint проекта> && tsc --noEmit && tsc --noEmit -p scripts",
-		"verify": "pnpm check && pnpm test:run"
+		"verify": "pnpm check && pnpm test:run && node scripts/hooks/verifyStamp.mts"
 	},
 	"devDependencies": {
 		"agent-browser": "<текущая версия>",

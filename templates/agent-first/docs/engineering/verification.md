@@ -33,7 +33,7 @@
 
 | Что | Команда |
 | --- | --- |
-| Project gate: статические проверки и все тесты; его же запускает CI | `pnpm verify` |
+| Project gate: статические проверки и все тесты; его же запускает CI, успех отмечает дерево файлов для Stop-хука | `pnpm verify` |
 | Статические проверки: lint, типы, guardrails документации и skills | `pnpm check` |
 | Один тестовый файл | `pnpm exec vitest run <path>` |
 | Все тесты | `pnpm test:run` |

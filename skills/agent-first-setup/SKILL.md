@@ -30,7 +30,7 @@ disable-model-invocation: true
 4. **Скопируй без перезаписи.** Файлы, которых в проекте нет, копируй как есть. Существующий файл не перезаписывай: слей содержимое — правила проекта остаются, разделы шаблона добавляются, конфликт правил назови в отчёте. `.gitignore` — допиши строки из [references/gitignore.txt](references/gitignore.txt), которых нет.
    **Done when:** каждый файл шаблона либо скопирован, либо слит, либо осознанно пропущен с причиной.
 
-5. **Подставь плейсхолдеры** во всех скопированных файлах, затем `grep -rn '{{' AGENTS.md CODING_STANDARDS.md GLOSSARY-MAP.md docs .agents .claude .codex scripts` — пусто.
+5. **Подставь плейсхолдеры** во всех скопированных файлах, затем `grep -rnE '\{\{[A-Z_]+\}\}' AGENTS.md CODING_STANDARDS.md GLOSSARY-MAP.md docs .agents .claude .codex .github .gitlab-ci.yml scripts` — пусто. `${{ github.… }}` в workflow GitHub — синтаксис Actions, не плейсхолдер.
 
    | Плейсхолдер       | Что это                          | Откуда                                   |
    | ----------------- | -------------------------------- | ---------------------------------------- |
@@ -48,6 +48,8 @@ disable-model-invocation: true
    - Документ, который стеку не подходит (нет UI — `forms`, `tables`, `e2e`, `accessibility`, `styleguide`; нет аналитики — `analytics`), удали вместе со строкой в `CODING_STANDARDS.md` и ссылками на него.
    - Без browser harness удали `scripts/agentBrowser.mts`, `scripts/browser*.mts`, `scripts/prepareBrowserAuth.mts`, `agent-browser.json`, `docs/engineering/browser-testing.md`, `.agents/skills/verify-change/features/` и `maintain-verification-skill`, а в `verify-change` и `verification.md` оставь проверку сценария вручную пользователем. С harness — заполни `LOGIN_URL`, `LOGIN_FORM` и `prepareAppAfterLogin` в `scripts/browserRuntime.mts`.
    - Удалённый vendored skill убери и из `skills-lock.json`.
+   - CI: оставь шаблон своего хостинга — `.github/workflows/verify.yml` или `.gitlab-ci.yml` — и удали другой. Существующий pipeline не заменяй: добавь в него job с `pnpm verify`. Обоим шаблонам нужно поле `packageManager` в `package.json`.
+   - Хуки Claude Code в `.claude/settings.json` вызывают `scripts/hooks/*.mts` через `node`: нужен Node с поддержкой TypeScript без сборки (22.18+). `PROTECTED_BRANCHES` в `scripts/hooks/guardGitPush.mts` — ветка по умолчанию и релизные ветки проекта.
    **Done when:** в документах нет команд, путей и библиотек, которых нет в проекте.
 
 7. **Проверь.** `bash scripts/linkClaudeSkills.sh`, установка зависимостей, `pnpm lint:size:update` (подстановка плейсхолдеров уменьшила файлы из baseline), затем `pnpm lint:agents` и `tsc --noEmit -p scripts`. Битую ссылку чини, а не удаляй проверку. Файл проекта больше 5 000 токенов раздели или, если он уже был до setup, внеси в `scripts/baselines/file-size.json`.
@@ -58,5 +60,5 @@ disable-model-invocation: true
 - что скопировано, что слито и с какими конфликтами, что удалено и почему;
 - значения плейсхолдеров;
 - результат проверок;
-- что осталось человеку: заполнить `GLOSSARY-MAP.md` и словари доменов (`domain-modeling`), карту фич `verify-change` (первые проходы в браузере), dev-пользователя в `.env.browser.local`, CI-запуск `pnpm verify`;
+- что осталось человеку: заполнить `GLOSSARY-MAP.md` и словари доменов (`domain-modeling`), карту фич `verify-change` (первые проходы в браузере), dev-пользователя в `.env.browser.local`, protected branches на хостинге (хук — не граница безопасности);
 - последней строкой — вопрос, создать ли ветку и закоммитить.

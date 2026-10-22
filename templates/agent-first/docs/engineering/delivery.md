@@ -23,6 +23,8 @@
 - публикацию комментариев и ответов;
 - merge и release.
 
+Push в защищённые ветки и перезапись удалённой истории запрещены и по явной просьбе: защищённые ветки меняются через MR/PR, хук `scripts/hooks/guardGitPush.mts` отказывает в таком push.
+
 По умолчанию пользователь выполняет эти действия вручную. Setup не требует `glab`/`gh`, плагинов хостинга, API token или browser-автоматизации хостинга.
 
 Инструкции upstream skills, включая сохранение prototype в throwaway branch, эти внешние действия не расширяют: skill готовит capture/staging plan и останавливается перед branch, push, MR/PR, merge и release.

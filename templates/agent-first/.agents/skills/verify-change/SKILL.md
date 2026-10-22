@@ -25,7 +25,7 @@ description: Collect fresh evidence that a diff works before calling it done. Us
    - По умолчанию — harness `pnpm browser:*` по [browser-testing.md](../../../docs/engineering/browser-testing.md): `pnpm dev --port $(pnpm -s browser:port)`, `pnpm browser:login`, затем `pnpm browser:doctor`. Doctor повторяй после любого неожиданного поведения; при `FAIL` чини окружение, а не продолжай сценарий.
    - Как дойти до фичи, чем её проверить и какие у неё предусловия — в [карте фич](features/README.md): общие правила и список файлов фич. Сеть — `pnpm browser:network`. Не хватает предусловия — сценарий `blocked` с причиной, сценарий не ослабляй. Новый подводный камень допиши в файл фичи.
    - Cleanup в любом исходе: закрыть сессию, остановить свой `pnpm dev`, проверить, что порт этого checkout свободен. Screenshots остаются в `browser-artifacts/`.
-6. После последнего изменения используй только свежие результаты. Старый успешный output не считается evidence.
+6. После последнего изменения используй только свежие результаты. Старый успешный output не считается evidence. Правка после `pnpm verify` — повтори его: Stop-хук сверяет дерево файлов с последним успешным прогоном.
 7. Верни один отчёт по шаблону ниже. При любом обязательном failed/skipped check результат — `NOT READY`.
 
 Не запускай `review-changes` внутри этого skill: review остаётся отдельным шагом. Статический review допустим и до `READY`, но обязан отметить отсутствующий или `NOT READY` evidence и не может объявить изменение готовым. Для финального handoff используйте обычную последовательность: `verify-change` с verdict `READY`, затем `review-changes`.
