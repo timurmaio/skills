@@ -1,5 +1,5 @@
 ---
-name: agent-first-setup
+name: setup-agent-workflow
 description: Bootstrap or refresh the agent-first development setup in a project from the timurmaio/skills template — AGENTS.md, coding standards, engineering docs, issue tracker in docs/plans, project and vendored skills, guardrail scripts, Claude/Codex/Cursor configs. Use when the user asks to set up AI/agent-first workflow in a repo («настрой agent first», «перенеси AI сетап»), or to update a project's setup from the template.
 disable-model-invocation: true
 ---
