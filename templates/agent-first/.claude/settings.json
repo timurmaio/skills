@@ -3,5 +3,23 @@
 	"permissions": {
 		"deny": ["Read(.env.local)", "Read(.env.browser.local)"],
 		"ask": ["Bash(git push *)"]
+	},
+	"hooks": {
+		"SessionStart": [
+			{
+				"hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/sessionStart.mts\"" }]
+			}
+		],
+		"PreToolUse": [
+			{
+				"matcher": "Bash",
+				"hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/guardGitPush.mts\"" }]
+			}
+		],
+		"Stop": [
+			{
+				"hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/stopWithoutVerify.mts\"" }]
+			}
+		]
 	}
 }

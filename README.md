@@ -31,6 +31,8 @@ CLI ищет `skills/<имя>/SKILL.md` с фронтматтером `name` и 
 | Guardrails | `scripts/`: vendored skills не патчены, симлинки `.claude/skills`, битые ссылки, оглавление длинных документов, лимит 5 000 токенов на файл, копия env в worktree |
 | Browser harness | `scripts/agentBrowser.mts`, `browser*.mts`, `prepareBrowserAuth.mts`, `agent-browser.json`: агент сам логинится и проверяет сценарий в изолированном браузере |
 | Конфиги агентов | `.claude/settings.json` (env не читать, `git push` с подтверждением), `.claude/launch.json`, `.codex/rules/project.rules`, `.cursorignore` |
+| Хуки Claude Code | `scripts/hooks/`: нельзя закончить сессию с правками кода без свежего `pnpm verify`; нельзя пушить в защищённые ветки и переписывать историю |
+| CI | `.github/workflows/verify.yml` и `.gitlab-ci.yml`: тот же `pnpm verify`, что у агента |
 
 Vendored skills в шаблоне — копии upstream один в один: обновляются через `npx skills add <source> --skill <name>`, адаптации живут в `docs/agents/upstream-skills.md`.
 

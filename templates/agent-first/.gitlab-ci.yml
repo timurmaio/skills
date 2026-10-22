@@ -1,0 +1,21 @@
+# Тот же project gate, что у агента: verify-change и CI запускают `pnpm verify` (docs/engineering/verification.md).
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "{{MAIN_BRANCH}}"
+
+verify:
+  image: node:24
+  timeout: 20 minutes
+  interruptible: true
+  cache:
+    key:
+      files: [pnpm-lock.yaml]
+    paths: [.pnpm-store]
+  before_script:
+    # corepack ставит pnpm той версии, что в поле packageManager в package.json.
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+  script:
+    - pnpm verify
