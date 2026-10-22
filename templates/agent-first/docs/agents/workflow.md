@@ -46,7 +46,7 @@ npx -y skills add <source> --skill <name> -a codex --copy -y
 | `git push` — только по запросу | `.claude/settings.json`: `git push` спрашивает подтверждение        | только текст: проектной настройки нет                                | `.codex/rules/project.rules`: спрашивает; грузится в trusted-проекте |
 | Vendored skills не патчить     | `pnpm lint:skills` в `pnpm check`, падает и в CI                    | тот же `pnpm lint:skills`                                            | тот же `pnpm lint:skills`                                           |
 
-Новый запрет добавляй во все механизмы, где они есть; `pnpm check` надёжнее всего — он падает и в CI.
+Новый запрет добавляй во все механизмы, где они есть; `pnpm check` надёжнее всего — он входит в `pnpm verify` и падает в CI.
 
 ## Worktree и локальный env
 

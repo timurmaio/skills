@@ -4,9 +4,9 @@
 
 ## Базовое состояние
 
-- `pnpm dev` этого worktree на `localhost:{{DEV_PORT}}`, `pnpm browser:login` прошёл, `pnpm browser:doctor` — все `OK`.
+- `pnpm dev` этого worktree на его порту (`pnpm -s browser:port`), `pnpm browser:login` прошёл, `pnpm browser:doctor` — все `OK`.
 - Dev-пользователь из `.env.browser.local`, данные dev-контура. После входа открыта стартовая страница приложения.
-- Каждый рецепт начинается с прямого перехода по URL: `pnpm browser -- open http://localhost:{{DEV_PORT}}/<route>`.
+- Каждый рецепт начинается с прямого перехода по URL: `pnpm browser -- open http://localhost:<порт>/<route>`.
 
 ## Как водить
 

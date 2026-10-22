@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Agent-first setup
 
-Переносит в проект шаблон [`templates/agent-first/`](https://github.com/timurmaio/skills/tree/main/templates/agent-first) и подгоняет его под проект. Шаблон — снимок сетапа, который прошёл пилот на реальных тикетах: единый цикл «реализация → `verify-change` → `review-changes` → `commit-changes`», tickets в `docs/plans/`, идеи в `docs/ideas/`, guardrails в `pnpm check`.
+Переносит в проект шаблон [`templates/agent-first/`](https://github.com/timurmaio/skills/tree/main/templates/agent-first) и подгоняет его под проект. Шаблон — снимок сетапа, который прошёл пилот на реальных тикетах: единый цикл «реализация → `verify-change` → `review-changes` → `commit-changes`», tickets в `docs/plans/`, идеи в `docs/ideas/`, guardrails и тесты в `pnpm verify`.
 
 Результат — изменения в рабочей копии и отчёт. Ветку, коммит, push — только по просьбе пользователя.
 
@@ -43,7 +43,7 @@ disable-model-invocation: true
 
 6. **Подгони под стек.**
    - Команды проекта — в таблицу «Команды» `docs/engineering/verification.md`; skills ссылаются на неё. Если менеджер не pnpm, замени `pnpm` во всех документах и skills.
-   - Scripts и devDependencies — по [references/package-scripts.json](references/package-scripts.json): `check` объединяет `lint:agents` с lint и typecheck проекта.
+   - Scripts и devDependencies — по [references/package-scripts.json](references/package-scripts.json): `check` объединяет `lint:agents` с lint и typecheck проекта, `verify` добавляет все тесты. Если `test:run` нет, заведи его: прогон всех тестов без watch.
    - Таблица стека в `docs/engineering/styleguide.md` — по `package.json`; строки без решения удали.
    - Документ, который стеку не подходит (нет UI — `forms`, `tables`, `e2e`, `accessibility`, `styleguide`; нет аналитики — `analytics`), удали вместе со строкой в `CODING_STANDARDS.md` и ссылками на него.
    - Без browser harness удали `scripts/agentBrowser.mts`, `scripts/browser*.mts`, `scripts/prepareBrowserAuth.mts`, `agent-browser.json`, `docs/engineering/browser-testing.md`, `.agents/skills/verify-change/features/` и `maintain-verification-skill`, а в `verify-change` и `verification.md` оставь проверку сценария вручную пользователем. С harness — заполни `LOGIN_URL`, `LOGIN_FORM` и `prepareAppAfterLogin` в `scripts/browserRuntime.mts`.
@@ -58,5 +58,5 @@ disable-model-invocation: true
 - что скопировано, что слито и с какими конфликтами, что удалено и почему;
 - значения плейсхолдеров;
 - результат проверок;
-- что осталось человеку: заполнить `GLOSSARY-MAP.md` и словари доменов (`domain-modeling`), карту фич `verify-change` (первые проходы в браузере), dev-пользователя в `.env.browser.local`, CI-запуск `pnpm check`;
+- что осталось человеку: заполнить `GLOSSARY-MAP.md` и словари доменов (`domain-modeling`), карту фич `verify-change` (первые проходы в браузере), dev-пользователя в `.env.browser.local`, CI-запуск `pnpm verify`;
 - последней строкой — вопрос, создать ли ветку и закоммитить.

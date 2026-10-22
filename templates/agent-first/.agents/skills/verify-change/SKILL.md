@@ -20,11 +20,11 @@ description: Collect fresh evidence that a diff works before calling it done. Us
 1. Прочитай ticket/spec и acceptance criteria. Если AC отсутствуют, верни `NOT READY`.
 2. Построй карту изменённых областей и классифицируй diff по `docs/engineering/verification.md`.
 3. Выбери минимальные targeted checks, которые доказывают изменённое поведение. Запиши выбор до запуска.
-4. Запусти targeted checks, затем обязательный `pnpm check` (команды — в [verification.md](../../../docs/engineering/verification.md#команды)). Пока targeted tests красные, Storybook и browser не запускай: верни `NOT READY` с упавшими тестами.
+4. Запусти targeted checks, затем обязательный `pnpm verify` (команды — в [verification.md](../../../docs/engineering/verification.md#команды)). Пока targeted tests красные, Storybook и browser не запускай: верни `NOT READY` с упавшими тестами.
 5. Выполни browser verification, если matrix требует проверки пользовательского сценария. Каждый такой сценарий из AC проходи в браузере целиком, от входа до результата: тест его не заменяет. Поведение, в котором не уверен, смотри в браузере или коде, а не предполагай. Не изменяй реальные внешние или production-данные без явного разрешения.
-   - По умолчанию — harness `pnpm browser:*` по [browser-testing.md](../../../docs/engineering/browser-testing.md): `pnpm dev`, `pnpm browser:login`, затем `pnpm browser:doctor`. Doctor повторяй после любого неожиданного поведения; при `FAIL` чини окружение, а не продолжай сценарий.
+   - По умолчанию — harness `pnpm browser:*` по [browser-testing.md](../../../docs/engineering/browser-testing.md): `pnpm dev --port $(pnpm -s browser:port)`, `pnpm browser:login`, затем `pnpm browser:doctor`. Doctor повторяй после любого неожиданного поведения; при `FAIL` чини окружение, а не продолжай сценарий.
    - Как дойти до фичи, чем её проверить и какие у неё предусловия — в [карте фич](features/README.md): общие правила и список файлов фич. Сеть — `pnpm browser:network`. Не хватает предусловия — сценарий `blocked` с причиной, сценарий не ослабляй. Новый подводный камень допиши в файл фичи.
-   - Cleanup в любом исходе: закрыть сессию, остановить свой `pnpm dev`, проверить, что порт `{{DEV_PORT}}` свободен. Screenshots остаются в `browser-artifacts/`.
+   - Cleanup в любом исходе: закрыть сессию, остановить свой `pnpm dev`, проверить, что порт этого checkout свободен. Screenshots остаются в `browser-artifacts/`.
 6. После последнего изменения используй только свежие результаты. Старый успешный output не считается evidence.
 7. Верни один отчёт по шаблону ниже. При любом обязательном failed/skipped check результат — `NOT READY`.
 
@@ -58,7 +58,7 @@ description: Collect fresh evidence that a diff works before calling it done. Us
 | Check | Command / scenario | Result |
 | ----- | ------------------ | ------ |
 | Targeted tests | `<command>` | ✅/❌/⏭ |
-| Project gate | `pnpm check` | ✅/❌ |
+| Project gate | `pnpm verify` | ✅/❌ |
 | Browser | <environment + сценарий из AC целиком> | ✅/❌/⏭ |
 
 ### Not verified

@@ -21,7 +21,7 @@
 
 1. Зафиксировать acceptance criteria и изменённые области.
 2. Выбрать и запустить targeted checks.
-3. Выполнить `pnpm check`.
+3. Выполнить `pnpm verify`: статические проверки и все тесты.
 4. Проверить пользовательский сценарий в browser, если изменение его затрагивает.
 5. Вернуть свежий evidence report с ограничениями проверки.
 
@@ -33,13 +33,14 @@
 
 | Что | Команда |
 | --- | --- |
-| Project gate: lint, типы, guardrails документации и skills | `pnpm check` |
+| Project gate: статические проверки и все тесты; его же запускает CI | `pnpm verify` |
+| Статические проверки: lint, типы, guardrails документации и skills | `pnpm check` |
 | Один тестовый файл | `pnpm exec vitest run <path>` |
 | Все тесты | `pnpm test:run` |
 | Lint по файлам | `pnpm exec oxlint <files>`, `pnpm exec eslint --cache <files>` |
 | Типы | `pnpm exec tsc --noEmit` |
 | Production build | `pnpm build` |
-| Dev-сервер | `pnpm dev` → `localhost:{{DEV_PORT}}` |
+| Dev-сервер | `pnpm dev --port $(pnpm -s browser:port)`: основной checkout — `{{DEV_PORT}}`, worktree — свой порт |
 | Browser harness | `pnpm browser:login`, `pnpm browser:doctor`, `pnpm browser -- <command>` |
 
 ## Verification matrix
@@ -52,10 +53,10 @@
 | UI layout, interaction, form, navigation, loading/error state | Существующие tests применимой логики                                     | Browser обязателен; при нормативном design source — явное сравнение, не только smoke |
 | API contract, request/response mapping, cache lifecycle       | Mapper/validator/query tests и typecheck через общий gate                | Проверить loading, success и failure states на доступном безопасном seam             |
 | Workspace package (`packages/*`)                              | Targeted tests пакета через `pnpm --filter <package> test -- <scope>`    | Build/Storybook/browser по затронутому публичному контракту                          |
-| Build, dependency, tooling или framework config               | Минимальная команда затронутого tool + `pnpm check`                      | `pnpm build`, если изменение влияет на production build/runtime                      |
-| Cross-cutting shared contract или test infrastructure         | Все затронутые suites; при ненадёжном выделении scope — `pnpm test:run`  | Build/browser по потребителям высокого риска                                         |
+| Build, dependency, tooling или framework config               | Минимальная команда затронутого tool + `pnpm verify`                     | `pnpm build`, если изменение влияет на production build/runtime                      |
+| Cross-cutting shared contract или test infrastructure         | Все затронутые suites, затем `pnpm verify`                               | Build/browser по потребителям высокого риска                                         |
 
-`pnpm check` обязателен для каждого ticket, но не заменяет targeted tests: он не запускает тесты.
+`pnpm verify` обязателен для каждого ticket и запускается после targeted checks: targeted tests доказывают изменённое поведение и быстро показывают, что сломано, а полный прогон ловит регрессии у потребителей. CI запускает тот же `pnpm verify`: зелёный локальный прогон не заменяет pipeline, а pipeline не заменяет browser verification.
 
 ## Выбор tests
 
@@ -111,7 +112,7 @@ Browser verification и design conformance — разные evidence:
 | Check          | Command / scenario                | Result  |
 | -------------- | --------------------------------- | ------- |
 | Targeted tests | `<command>`                       | ✅/❌/⏭ |
-| Project gate   | `pnpm check`                      | ✅/❌   |
+| Project gate   | `pnpm verify`                     | ✅/❌   |
 | Browser        | <environment + scenario>          | ✅/❌/⏭ |
 | Design source  | <source/nodes or deferred ticket> | ✅/❌/⏭ |
 

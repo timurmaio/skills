@@ -62,7 +62,7 @@ function checkPortOwner(): CheckResult {
 		.filter(Boolean);
 
 	if (pids.length === 0) {
-		return { ok: false, message: `порт ${PORT} свободен — запусти pnpm dev` };
+		return { ok: false, message: `порт ${PORT} свободен — запусти pnpm dev --port ${PORT}` };
 	}
 
 	const worktree = realpathSync(process.cwd());
