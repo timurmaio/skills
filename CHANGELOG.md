@@ -2,10 +2,11 @@
 
 ## Unreleased
 
+- Скилл переименован в `setup-agent-workflow`: он ставит весь рабочий процесс агента, а не только скиллы.
 - Шаблон agent-first: хуки Claude Code — Stop не даёт закончить сессию с правками кода без свежего `pnpm verify`, PreToolUse запрещает push в защищённые ветки и перезапись истории.
 - Шаблон agent-first: CI для GitHub Actions и GitLab с `pnpm verify`.
 - Шаблон `templates/agent-first/`: AI-сетап для agent-first разработки — `AGENTS.md`, стандарты кода, инженерные документы, workflow агента, issue tracker в `docs/plans/`, project и vendored skills, guardrail-скрипты, browser harness, конфиги Claude Code, Codex и Cursor.
-- Скилл `agent-first-setup`: переносит шаблон в проект и подгоняет под стек.
+- Скилл `setup-agent-workflow`: переносит шаблон в проект и подгоняет под стек.
 
 ## v0.1.0
 

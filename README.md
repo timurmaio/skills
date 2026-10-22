@@ -10,13 +10,13 @@ CLI ищет `skills/<имя>/SKILL.md` с фронтматтером `name` и 
 | --- | --- |
 | `feature-modules` | Фича как deep module: фасад `index.ts`, без `export *`, импорт только из корня фичи, alias и ESLint. |
 | `ui-conventions` | Не ставить `cursor: pointer` на кнопки. Курсор-рука — конвенция для ссылок. |
-| `agent-first-setup` | Переносит в проект шаблон [agent-first](#шаблон-agent-first) и подгоняет его под стек. Запускается только командой `/agent-first-setup`. |
+| `setup-agent-workflow` | Переносит в проект шаблон [agent-first](#шаблон-agent-first) и подгоняет его под стек. Запускается только командой `/setup-agent-workflow`. |
 
 Сторонние скиллы, которые ставятся в каждый проект отдельно от этого репозитория: [docs/recommended-skills.md](docs/recommended-skills.md).
 
 ## Шаблон agent-first
 
-[`templates/agent-first/`](templates/agent-first) — AI-сетап для agent-first разработки, обобщённый из рабочего проекта. Папка повторяет корень проекта: её содержимое копируется поверх репозитория, после чего плейсхолдеры `{{PROJECT}}`, `{{MAIN_BRANCH}}`, `{{TICKET_KEY}}`, `{{DEV_PORT}}` заменяются значениями проекта. Перенос и подгонку делает скилл `agent-first-setup`.
+[`templates/agent-first/`](templates/agent-first) — AI-сетап для agent-first разработки, обобщённый из рабочего проекта. Папка повторяет корень проекта: её содержимое копируется поверх репозитория, после чего плейсхолдеры `{{PROJECT}}`, `{{MAIN_BRANCH}}`, `{{TICKET_KEY}}`, `{{DEV_PORT}}` заменяются значениями проекта. Перенос и подгонку делает скилл `setup-agent-workflow`.
 
 Что внутри:
 
