@@ -1,6 +1,6 @@
 # Upstream skills в этом репозитории
 
-Vendored skills из `skills-lock.json` не патчатся на месте (проверяет `pnpm lint:skills`). Всё, чем их поведение отличается у нас, записано здесь. Общий цикл и выбор skill — в [workflow.md](workflow.md).
+Vendored skills из `skills-lock.json` не патчатся на месте (проверяет `pnpm lint:skills`). Всё, чем их поведение отличается у нас, записано здесь. Выбор skill — в [flow.md](flow.md), устройство сетапа — в [setup.md](setup.md).
 
 ## Содержание
 
@@ -11,7 +11,11 @@ Vendored skills из `skills-lock.json` не патчатся на месте (�
 
 ## Ссылки upstream skills на соседей
 
-Skills из `obra/superpowers` ссылаются на соседей как `superpowers:<name>`: у нас `superpowers:test-driven-development` — это `test-driven-development`, а `superpowers:verification-before-completion` — `verify-change`. Skills Мэтта зовут `tdd` и `code-review`: у нас это `test-driven-development` и `review-changes` в режиме fix — в субагенте с чистым контекстом, если инструмент умеет: передай ему scope, ticket и spec, свежий `verify-change` report.
+Skills из `obra/superpowers` ссылаются на соседей как `superpowers:<name>`, skills Мэтта — как `tdd` и `code-review`. Соседа с таким именем проект может держать сам; тогда ссылка ведёт к нему. Если его нет:
+
+- `superpowers:test-driven-development` и `tdd` — это `test-driven-development`;
+- `superpowers:verification-before-completion` — `verify-change`;
+- `code-review` — `review-changes` в субагенте с чистым контекстом, если инструмент умеет: передай ему scope, ticket и spec, свежий `verify-change` report. Режим — по [Authority](../engineering/delivery.md#authority).
 
 ## `implement-spec` в этом репозитории
 

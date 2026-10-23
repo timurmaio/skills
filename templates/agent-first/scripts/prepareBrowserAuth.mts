@@ -10,9 +10,10 @@ import {
 	readAgentBrowser,
 	runAgentBrowser,
 } from "./browserRuntime.mts";
+import { APP_ENV_FILE, BROWSER_ENV_FILE } from "./projectConfig.mts";
 
-const LOCAL_APP_ENV_PATH = resolve(process.cwd(), ".env.local");
-const LOCAL_BROWSER_ENV_PATH = resolve(process.cwd(), ".env.browser.local");
+const LOCAL_APP_ENV_PATH = resolve(process.cwd(), APP_ENV_FILE);
+const LOCAL_BROWSER_ENV_PATH = resolve(process.cwd(), BROWSER_ENV_FILE);
 const AUTH_PROFILE = "{{PROJECT}}-dev";
 const LOGIN_TIMEOUT_MS = 15_000;
 

@@ -38,7 +38,7 @@ Worktree получает копии env-файлов из основного ch
 pnpm env:copy
 ```
 
-Копия, а не symlink: окружение worktree можно поменять, не задевая остальные. Существующий файл команда не перезаписывает и значения не выводит. `.env.local` обязателен, `.env.browser.local` — только для authenticated browser verification.
+Копия, а не symlink: окружение worktree можно поменять, не задевая остальные. Существующий файл команда не перезаписывает и значения не выводит. `{{APP_ENV_FILE}}` обязателен, `.env.browser.local` — только для authenticated browser verification.
 
 Авторизация:
 

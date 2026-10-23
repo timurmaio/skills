@@ -107,11 +107,11 @@ Upstream skills Мэтта (`wayfinder`, `to-spec`, `to-tickets`, `implement-spe
 
 ### Когда skill закрывает работу
 
-- **Ticket.** Перед закрытием — свежий `READY` от `verify-change` и `review-changes` в режиме fix без 🔴 и 🟠. Design acceptance в этом ticket — `verify-change` сравнивает с названным источником, общего smoke мало. Тогда поставь `**Status:** resolved` и закоммить его вместе со slice через `commit-changes`. Остановился раньше — ticket остаётся `claimed`, причина идёт в отчёт.
+- **Ticket.** Перед закрытием — свежий `READY` от `verify-change` и `review-changes` без 🔴 и 🟠. Design acceptance в этом ticket — `verify-change` сравнивает с названным источником, общего smoke мало. Тогда поставь `**Status:** resolved`; коммит ticket вместе со slice через `commit-changes` — по [Authority](../engineering/delivery.md#authority). Остановился раньше — ticket остаётся `claimed`, причина идёт в отчёт.
 - **Отчёт** — через `summarize-changes`: реализованные AC, файлы и тесты, evidence, результат ревью, риски и непроверенное, оставшиеся ⚪.
 - **Инициатива.** Последний открытый ticket — скажи об этом: `done` и перенос в `completed/` решает человек по [статусам](#статусы).
 
-Upstream skills (`skills-lock.json`) **не патчить**: адаптации — в этом файле, `workflow.md` или project-owned skills. См. [AGENTS.md](../../AGENTS.md).
+Upstream skills (`skills-lock.json`) **не патчить**: адаптации — в этом файле, [upstream-skills.md](upstream-skills.md) или project-owned skills. См. [AGENTS.md](../../AGENTS.md).
 
 ### Spec contract
 

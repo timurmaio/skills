@@ -6,7 +6,8 @@
 # Cursor: локальное состояние.
 .cursor/
 # Claude Code: локальное игнорируется, кроме симлинков на project skills (источник — .agents/skills)
-# и общих настроек разрешений (личные — в .claude/settings.local.json).
+# общих настроек разрешений и хуков (личные — в .claude/settings.local.json) и launch.json.
 .claude/*
 !.claude/skills/
 !.claude/settings.json
+!.claude/launch.json

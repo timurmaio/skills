@@ -7,7 +7,9 @@ description: Review a diff against project standards and the request's acceptanc
 
 ## Режим
 
-- **fix** — по умолчанию для своего diff: найди findings, исправь подтверждённые, повтори `verify-change` и верни короткую сводку.
+Режим по умолчанию для своего diff задаёт [Authority](../../../docs/engineering/delivery.md#authority).
+
+- **fix** — найди findings, исправь подтверждённые, повтори `verify-change` и верни короткую сводку. Пользователь может попросить его явно («исправь по ревью»).
 - **read-only** — пользователь просит только посмотреть («только ревью», «без правок») или diff чужой: ветка коллеги, чужой MR. Результат — полный отчёт, код не меняется.
 
 ## Scope

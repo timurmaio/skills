@@ -23,9 +23,9 @@
 - `chore`: обслуживание, которое не подходит под типы выше. Не используй как catch-all.
 - `revert`: откат предыдущего commit.
 
-Scope ставь, когда он делает историю понятнее: домен из `src/features`, package name, tool или workflow (`feat(projects): ...`, `fix(ui): ...`, `ci(release): ...`, `docs(agents): ...`). Не придумывай scope, если весь смысл уже ясен из description.
+Scope ставь, когда он делает историю понятнее: домен из `{{FEATURES_DIR}}`, package name, tool или workflow (`feat(projects): ...`, `fix(ui): ...`, `ci(release): ...`, `docs(agents): ...`). Не придумывай scope, если весь смысл уже ясен из description.
 
-Description пиши на русском, без точки в конце. Ticket получай через `bash ./.agents/skills/commit-changes/scripts/current-ticket.sh`; скрипт возвращает первый ключ задачи (`{{TICKET_KEY}}-123`) из branch name. Если скрипт вернул номер, ставь его первым в description после `type(scope):`: `fix(reports): {{TICKET_KEY}}-123 сохранить фильтры при смене вкладки`. Если ticket не найден, не выдумывай номер. Не ставь номер задачи перед `type`, чтобы не ломать Conventional Commit. Формулируй как release note для пользователя изменения, а не как внутренний log: `fix(reports): {{TICKET_KEY}}-123 сохранить фильтры при смене вкладки`, не `fix(reports): {{TICKET_KEY}}-123 обновить useEffect`.
+Description пиши на русском, без точки в конце. Ticket получай через `bash scripts/currentTicket.sh`; скрипт возвращает первый ключ задачи (`{{TICKET_KEY}}-123`) из branch name. Если скрипт вернул номер, ставь его первым в description после `type(scope):`: `fix(reports): {{TICKET_KEY}}-123 сохранить фильтры при смене вкладки`. Если ticket не найден, не выдумывай номер. Не ставь номер задачи перед `type`, чтобы не ломать Conventional Commit. Формулируй как release note для пользователя изменения, а не как внутренний log: `fix(reports): {{TICKET_KEY}}-123 сохранить фильтры при смене вкладки`, не `fix(reports): {{TICKET_KEY}}-123 обновить useEffect`.
 
 Body добавляй, когда future agent выиграет от контекста:
 
