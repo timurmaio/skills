@@ -16,15 +16,15 @@ CLI ищет `skills/<имя>/SKILL.md` с фронтматтером `name` и 
 
 ## Шаблон agent-first
 
-[`templates/agent-first/`](templates/agent-first) — AI-сетап для agent-first разработки, обобщённый из рабочего проекта. Папка повторяет корень проекта: её содержимое копируется поверх репозитория, после чего плейсхолдеры `{{PROJECT}}`, `{{MAIN_BRANCH}}`, `{{TICKET_KEY}}`, `{{DEV_PORT}}` заменяются значениями проекта. Перенос и подгонку делает скилл `setup-agent-workflow`.
+[`templates/agent-first/`](templates/agent-first) — AI-сетап для agent-first разработки, обобщённый из рабочего проекта. Папка повторяет корень проекта: её содержимое копируется поверх репозитория, после чего плейсхолдеры (`{{PROJECT}}`, `{{MAIN_BRANCH}}`, `{{FEATURES_DIR}}` и другие) заменяются значениями проекта, а из вариантов полномочий агента остаётся один: коммитит сам или по просьбе. Чаще всего шаблон сливается с уже существующим AI-сетапом проекта. Перенос и подгонку делает скилл `setup-agent-workflow`.
 
 Что внутри:
 
 | Часть | Файлы |
 | --- | --- |
 | Точка входа агента | `AGENTS.md` (guardrails и pointers), `CLAUDE.md` → `@AGENTS.md`, `CODING_STANDARDS.md` (правила и карта документов по условию), `GLOSSARY-MAP.md` |
-| Workflow агента | `docs/agents/`: единый цикл и выбор skill, адаптации upstream skills, repository Markdown как issue tracker (`docs/plans/`, статусы, контракт ticket), доменные словари и ADR, очередь повторов для `/correct` |
-| Инженерные документы | `docs/engineering/`: delivery (границы коммитов и внешних действий), verification (evidence gate, команды), testing, browser-testing, features, styleguide, forms, accessibility, tables, e2e, analytics |
+| Workflow агента | `docs/agents/`: `flow.md` — единый цикл и выбор skill, `setup.md` — устройство сетапа, `guardrails.md`, адаптации upstream skills, repository Markdown как issue tracker (`docs/plans/`, статусы, контракт ticket), доменные словари и ADR, очередь повторов для `/correct` |
+| Инженерные документы | `docs/engineering/`: delivery (полномочия, коммиты и внешние действия), verification (evidence gate, команды), testing, browser-testing, features, styleguide с частями code, react и styling, forms, accessibility, tables, e2e, analytics |
 | Идеи и планы | `docs/ideas/README.md` (формат заметок), `docs/plans/completed/` |
 | Project skills | `capture-idea`, `catch-up`, `commit-changes`, `review-changes`, `summarize-changes`, `verify-change` с картой фич |
 | Vendored skills | 15 skills из `mattpocock/skills`, `obra/superpowers`, `cursor/plugins` в `.agents/skills/`, хеши в `skills-lock.json`: `grilling`, `to-spec`, `to-tickets`, `implement`, `implement-spec`, `wayfinder`, `research`, `prototype`, `domain-modeling`, `writing-for-agents`, `test-driven-development`, `systematic-debugging`, `receiving-code-review`, `correct`, `maintain-verification-skill` |
@@ -34,7 +34,7 @@ CLI ищет `skills/<имя>/SKILL.md` с фронтматтером `name` и 
 | Хуки Claude Code | `scripts/hooks/`: нельзя закончить сессию с правками кода без свежего `pnpm verify`; нельзя пушить в защищённые ветки и переписывать историю |
 | CI | `.github/workflows/verify.yml` и `.gitlab-ci.yml`: тот же `pnpm verify`, что у агента |
 
-Vendored skills в шаблоне — копии upstream один в один: обновляются через `npx skills add <source> --skill <name>`, адаптации живут в `docs/agents/upstream-skills.md`.
+Vendored skills в шаблоне — копии upstream один в один: обновляются через `npx skills add <source> --skill <name>` и `pnpm lint:skills:update`, адаптации живут в `docs/agents/upstream-skills.md`.
 
 ## Установка
 

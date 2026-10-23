@@ -39,5 +39,6 @@ function copy_env_file() {
 	printf '%s скопирован из основного checkout\n' "${file_name}"
 }
 
-copy_env_file ".env.local" "true"
+# Env приложения — тот же путь, что APP_ENV_FILE в scripts/projectConfig.mts.
+copy_env_file "{{APP_ENV_FILE}}" "true"
 copy_env_file ".env.browser.local" "false"

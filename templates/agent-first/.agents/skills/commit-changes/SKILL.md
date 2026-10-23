@@ -14,7 +14,7 @@ description: Split the worktree into focused Conventional Commits. Use when a fi
 | Источник | Scope | `{{MAIN_BRANCH}}` |
 | -------- | ----- | -------- |
 | **user-invoked** — пользователь назвал skill или попросил закоммитить | весь dirty/staged worktree, если пользователь не сузил scope | любые slices: вызов — явный запрос |
-| **agent-initiated** — агент коммитит свою готовую задачу | только изменения текущей задачи | только Markdown-документация и agent instructions |
+| **agent-initiated** — агент коммитит свою готовую задачу, если это разрешает [Authority](../../../docs/engineering/delivery.md#authority) | только изменения текущей задачи | только Markdown-документация и agent instructions |
 
 ## Branches
 
@@ -47,7 +47,7 @@ description: Split the worktree into focused Conventional Commits. Use when a fi
    - Если связь failure со slice не исключена, остановись до commit. Не отключай checks/hooks и не скрывай ошибку.
    **Done when:** commit не включает unrelated files; checks прошли либо выполнены условия локального commit из [delivery workflow](../../../docs/engineering/delivery.md#локальный-commit-при-failed-check).
 
-7. **Resolve ticket** — вызови `bash ./.agents/skills/commit-changes/scripts/current-ticket.sh`.
+7. **Resolve ticket** — вызови `bash scripts/currentTicket.sh`.
    **Done when:** первый ticket из branch name известен или явно отсутствует; номер не придуман вручную.
 
 8. **Commit slice** — Conventional Commit по [CONVENTIONAL_COMMITS.md](CONVENTIONAL_COMMITS.md): `type(scope): {{TICKET_KEY}}-123 русское описание`. Повтори 5–8 для следующего slice.

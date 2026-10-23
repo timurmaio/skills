@@ -18,7 +18,7 @@
 - Табличные примитивы (`Table`) — только статичная разметка (сводки, detail) и chrome вокруг `DataTable` (скелетон, border, bulk-тулбар).
 - В `src` нет своей table-инфраструктуры: без `src/tables`, без общего namespace переводов `Tables`. Колонки, cell-компоненты и переводы живут в фиче-владельце.
 - Табличный kernel (TanStack Table и аналоги) в приложении не импортируется. Второй kernel или ручная сборка чекбоксов выбора не допускаются.
-- `data`, `columns`, `getRowId` и `canSelectRow` — стабильные ссылки ([styleguide.md](styleguide.md#4-компоненты-react)).
+- `data`, `columns`, `getRowId` и `canSelectRow` — стабильные ссылки ([react.md](react.md#компоненты-react)).
 - Always-mounted drawer/modal с таблицей внутри не должен гонять нестабильный `data` на каждый render родителя, пока он закрыт.
 - Cross-page selection, lock и bulk payload — домен родителя (выбранные id, кэш строк, `selectedCount`, `onClearSelection`).
 

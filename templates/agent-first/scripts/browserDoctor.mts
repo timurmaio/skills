@@ -22,6 +22,7 @@ import {
 	LOGIN_URL,
 	readAgentBrowser,
 } from "./browserRuntime.mts";
+import { APP_ENV_FILE, BROWSER_ENV_FILE } from "./projectConfig.mts";
 
 const PORT = APP_PORT;
 
@@ -49,10 +50,10 @@ if (results.some(([, result]) => !result.ok)) {
 }
 
 function checkEnvFiles(): CheckResult {
-	const missing = [".env.local", ".env.browser.local"].filter((file) => !existsSync(resolve(file)));
+	const missing = [APP_ENV_FILE, BROWSER_ENV_FILE].filter((file) => !existsSync(resolve(file)));
 
 	return missing.length === 0
-		? { ok: true, message: ".env.local и .env.browser.local на месте" }
+		? { ok: true, message: `${APP_ENV_FILE} и ${BROWSER_ENV_FILE} на месте` }
 		: { ok: false, message: `нет ${missing.join(", ")} — выполни pnpm env:copy` };
 }
 
@@ -66,7 +67,7 @@ function checkPortOwner(): CheckResult {
 	}
 
 	const worktree = realpathSync(process.cwd());
-	const foreignPids = pids.filter((pid) => getProcessCwd(pid) !== worktree);
+	const foreignPids = pids.filter((pid) => getCheckoutRoot(getProcessCwd(pid)) !== worktree);
 
 	return foreignPids.length === 0
 		? { ok: true, message: `порт ${PORT} занят dev-сервером этого worktree` }
@@ -149,6 +150,14 @@ function getProcessCwd(pid: string): string {
 		?.slice(1);
 
 	return cwd ? realpathSync(cwd) : "";
+}
+
+// В монорепо `pnpm dev` запускает сервер из пакета (`apps/web`), поэтому сравниваем корень checkout, а не cwd.
+// Префикс пути не подходит: worktree могут лежать внутри основного checkout, например в `.claude/worktrees/`.
+function getCheckoutRoot(directory: string): string {
+	if (!directory) return "";
+	const root = spawnSync("git", ["-C", directory, "rev-parse", "--show-toplevel"], { encoding: "utf8" }).stdout.trim();
+	return root ? realpathSync(root) : directory;
 }
 
 function runLsof(args: string[]): string {

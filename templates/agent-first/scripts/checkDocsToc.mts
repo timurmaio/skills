@@ -10,6 +10,7 @@
 
 import { globSync, readFileSync, writeFileSync } from "node:fs";
 import { toAnchor } from "./markdownAnchor.mts";
+import { FEATURES_DIR } from "./projectConfig.mts";
 
 const MAX_LINES_WITHOUT_TOC = 100;
 const TOC_HEADING = "## Содержание";
@@ -19,7 +20,7 @@ const DOC_GLOBS = [
 	"docs/agents/*.md",
 	"docs/engineering/*.md",
 	"packages/*/docs/*.md",
-	"src/features/*/docs/*.md",
+	`${FEATURES_DIR}/*/docs/*.md`,
 ];
 
 const shouldFix = process.argv.includes("--fix");

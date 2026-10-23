@@ -1,6 +1,6 @@
 # Guardrails агентов
 
-Как правила из [AGENTS.md](../../AGENTS.md) держатся проверками в каждом инструменте. Общий цикл и выбор skill — в [workflow.md](workflow.md).
+Как правила из [AGENTS.md](../../AGENTS.md) держатся проверками в каждом инструменте. Выбор skill — в [flow.md](flow.md), устройство сетапа — в [setup.md](setup.md).
 
 ## По инструментам
 

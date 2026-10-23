@@ -10,8 +10,8 @@
 import { execFileSync } from "node:child_process";
 import { readHookInput } from "./agentState.mts";
 
-// Ветки, куда агент не пушит никогда. `*` в конце — префикс: `release/*`.
-const PROTECTED_BRANCHES = ["{{MAIN_BRANCH}}", "release/*"];
+// Ветки, куда агент не пушит никогда. `*` в конце — префикс: допиши релизные ветки проекта, например `release/*`.
+const PROTECTED_BRANCHES = ["{{MAIN_BRANCH}}"];
 
 interface PreToolUseInput {
 	cwd: string;
