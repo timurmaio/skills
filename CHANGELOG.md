@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `docs/ui-props.md`: UI-компонент принимает пропсы в форме для отрисовки; DTO мапится на границе данных (`select`, loader, query-хук). В прототипе и при сквозных типах хватает `Pick<>`, формат строки остаётся в UI.
 - `setup-agent-workflow`: режим слияния с существующим AI-сетапом (`references/merge.md`), вопросы о полномочиях агента, языке комментариев, словарях и защищённых ветках, шаги для монорепо, Next.js 16, pnpm 11 и первой установки. По фидбеку прогона на papers.
 - Шаблон agent-first: полномочия агента — два варианта (коммитит сам или по просьбе); плейсхолдеры `{{FEATURES_DIR}}`, `{{APP_ENV_FILE}}`, `{{CODE_COMMENTS_LANGUAGE}}` и пути в `scripts/projectConfig.mts` для монорепо.
 - Шаблон agent-first: `workflow.md` разделён на `flow.md` и `setup.md`, styleguide — на части `code`, `react`, `styling`; baseline размеров пустой.
